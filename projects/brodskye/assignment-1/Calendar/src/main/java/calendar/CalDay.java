@@ -114,7 +114,7 @@ public class CalDay {
 		if(appts!=null)
 				this.appts = appts;
 		
-		if(appts!=null&&appts.size()==0)
+		if(appts!=null || appts.size()==0) //changed && to ||
 			this.appts = appts;
 	}
 	
