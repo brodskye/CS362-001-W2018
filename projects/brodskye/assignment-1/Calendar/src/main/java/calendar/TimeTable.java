@@ -50,7 +50,7 @@ public class TimeTable {
 	        }
 	        
 	        //Retrieve the appts - <appt> 
-		for (int i = 0; i < appts.size(); i++) {
+		for (int i = 0; i < appts.size()-1; i++) { //changed appts.size() to appts.size()-1
 			Appt appt=appts.get(i);
 			if(!appt.getValid()) continue;
 			// Figure out which days the appointment occurs on
@@ -201,7 +201,7 @@ public class TimeTable {
 	        if(appts==null||appt==null)
         		return null;
 	    	//Do not do anything to invalid appointments
-	        if (!appt.getValid()) {
+	        if (appt.getValid()) { //changed !appt.getValid() to appt.getValid()
 	            return null;
 	        }
 
