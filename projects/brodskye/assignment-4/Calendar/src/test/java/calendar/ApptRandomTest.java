@@ -109,6 +109,30 @@ public class ApptRandomTest {
 		 System.out.println("Done testing...");
 	 }
 
+	 /*
+	  * Generates random Appts with completely random values.
+	  */
+	 public Appt getRandomAppt() {
+		Random rand = new Random();
+		int startHour = rand.nextInt(100) - rand.nextInt(100);
+		int startMinute = rand.nextInt(100) - rand.nextInt(100);
+		int startDay = rand.nextInt(100) - rand.nextInt(100);
+		int startMonth = rand.nextInt(100) - rand.nextInt(100);
+		int startYear = 2018;
+		String title = "test appt";
+		String description = "testing a random appt";
+		
+		return new Appt(startHour, startMinute, startDay, startMonth, startYear, title, description);
+	 }
 
+	 /*
+	  * tests isValid for completely random appts to see if method catches errors properly.
+	  */
+	 @Test
+	 public void testRandomAppts() throws Throwable{
+		 for(int i = 0; i < NUM_TESTS; i++) {
+			 
+		 }
+	 }
 	
 }
