@@ -109,19 +109,8 @@ public class ApptRandomTest {
 		 System.out.println("Done testing...");
 	 }
 
-	 /*
-	  * Generates random Appts with completely random values.
-	  */
-	 public Appt getRandomAppt() {
-		Random rand = new Random();
-		int startHour = rand.nextInt(100) - rand.nextInt(100);
-		int startMinute = rand.nextInt(100) - rand.nextInt(100);
-		int startDay = rand.nextInt(100) - rand.nextInt(100);
-		int startMonth = rand.nextInt(100) - rand.nextInt(100);
-		int startYear = 2018;
-		String title = "test appt";
-		String description = "testing a random appt";
-		
+	 //create an Appt.
+	 public static Appt createAppt(int startHour, int startMinute, int startDay, int startMonth, int startYear, String title, String description){
 		return new Appt(startHour, startMinute, startDay, startMonth, startYear, title, description);
 	 }
 
@@ -130,9 +119,71 @@ public class ApptRandomTest {
 	  */
 	 @Test
 	 public void testRandomAppts() throws Throwable{
+		 Appt appt;
+		 int startHour;
+		 int startMinute;
+		 int startDay;
+		 int startMonth;
+		 int startYear=2018;
+		 String title = "test";
+		 String description = "test description";
+		 Random rand;
 		 for(int i = 0; i < NUM_TESTS; i++) {
-			 
+			rand = new Random(System.currentTimeMillis());
+			startHour = rand.nextInt(100) - rand.nextInt(100);
+			startMinute = rand.nextInt(100) - rand.nextInt(100);
+			startDay = rand.nextInt(100) - rand.nextInt(100);
+			startMonth = rand.nextInt(100) - rand.nextInt(100);
+			System.out.println("startHour:" + startHour);
+			System.out.println("startMinute:" + startMinute);
+			System.out.println("startDay:" + startDay);
+			System.out.println("startMonth:" + startMonth);
+			
+			if(startMonth > 12 || startMonth < 1)
+				break;	
+			appt = createAppt(startHour, startMinute, startDay, startMonth, startYear, title, description);
+
+			int NumDaysInMonth= CalendarUtil.NumDaysInMonth(startYear,startMonth-1);
+
+			if(startHour<0 || startHour>23)
+	    		assertFalse(appt.getValid());
+	    	else
+	        	if(startMinute<0 || startMinute>59)
+		    		assertFalse(appt.getValid());
+	        	else
+	            	if(startDay<1 || startDay>NumDaysInMonth) 
+	    	    		assertFalse(appt.getValid());
+	            	else
+	                	if(startMonth<1 || startMonth>12)
+	        	    		assertFalse(appt.getValid());
+	                	else
+	        	    		assertTrue(appt.getValid());
 		 }
 	 }
 	
+	@Test
+	public void testNullRecurDays() throws Throwable{
+		long randomseed =System.currentTimeMillis(); //10
+				Random random = new Random(randomseed);
+				
+				 int startHour=ValuesGenerator.RandInt(random);
+				 int startMinute=ValuesGenerator.RandInt(random);
+				 int startDay=ValuesGenerator.RandInt(random);;
+				 int startMonth=ValuesGenerator.getRandomIntBetween(random, 1, 11);
+				 int startYear=ValuesGenerator.RandInt(random);
+				 String title="Birthday Party";
+				 String description="This is my birthday party.";
+				 //Construct a new Appointment object with the initial data	 
+				 Appt appt = new Appt(startHour,
+				          startMinute ,
+				          startDay ,
+				          startMonth ,
+				          startYear ,
+				          title,
+						 description);
+				int recur=ApptRandomTest.RandomSelectRecur(random);
+				int recurIncrement = ValuesGenerator.RandInt(random);
+				int recurNumber=ApptRandomTest.RandomSelectRecurForEverNever(random);
+				appt.setRecurrence(null, recur, recurIncrement, recurNumber);
+	}
 }
