@@ -57,6 +57,16 @@ public class TimeTableRandomTest {
 		 assertEquals(appts.size(), numAppts); //expected <10> but was <9> because of error in getApptRange.
 	 }
 	 
+	 @Test
+	 public void testinvalidAppt() throws Throwable{
+		 TimeTable tb = new TimeTable();
+		 LinkedList<Appt> appts = new LinkedList<Appt>();
+		 for(int i = 0; i < 10; i++)
+			 appts.add(createValidAppt());
+		appts.add(new Appt(50, 30, 12, 2, 2018, "title", "description"));
+		LinkedList<CalDay> res = tb.getApptRange(appts, new GregorianCalendar(2017, 12, 12), new GregorianCalendar(2019, 10, 10));
+
+	 }
 	 /*
 	  * test deleteAppt
 	  */
@@ -353,7 +363,49 @@ public class TimeTableRandomTest {
         return list;
     }
 
-     @Test
+	public static Appt createAppt(){
+		Appt appt;
+		int startHour;
+		int startMinute;
+		int startDay;
+		int startMonth;
+		int startYear=2018;
+		String title = "test";
+		String description = "test description";
+		Random rand;
+		rand = new Random(System.currentTimeMillis());
+		startHour = rand.nextInt(50) - rand.nextInt(50);
+		startMinute = rand.nextInt(80) - rand.nextInt(80);
+		startDay = rand.nextInt(50) - rand.nextInt(50);
+		startMonth = rand.nextInt(15) - rand.nextInt(15);
+		System.out.println("startHour:" + startHour);
+		System.out.println("startMinute:" + startMinute);
+		System.out.println("startDay:" + startDay);
+		System.out.println("startMonth:" + startMonth);
+		System.out.println("	");
+		
+		if(startMonth > 12 || startMonth < 1)
+			startMonth = 1;
+
+		int nullOrNot = rand.nextInt(10);
+		if(nullOrNot < 3){
+			return null;
+		}
+		else{
+			return new Appt(startHour, startMinute, startDay, startMonth, startYear, title, description);
+		}
+		
+	}
+
+	public static LinkedList<Appt> createLinkedList(){
+		LinkedList<Appt> list = new LinkedList<Appt>();
+		for(int i = 0; i < 10; i++){
+			list.add(createAppt());
+		}
+		return list;
+	}
+
+     /*@Test
      public void testDeleteAppt() throws Throwable{
         //create a random list of appointments, all elements either valid or null
         //remove random element
@@ -367,10 +419,21 @@ public class TimeTableRandomTest {
             System.out.println("index: " + index + "	" + "size: " + list.size());
             newList = timetable.deleteAppt(list, list.get(index));
         }
-       /* LinkedList<Appt> uninit = new LinkedList<Appt>();
-        newList = timetable.deleteAppt(uninit,new Appt(3, 55, 24, 2, 2018, "test", "testing"));
-        newList = timetable.deleteAppt(uninit, null);
-        newList = timetable.deleteAppt(list, new Appt(3, 55, 24, 2, 2018, "test", "testing"));*/
-     }
+	}*/
+	@Test
+	public void testDeleteAppt() throws Throwable{
+		Random rand;
+		for(int i = 0; i < 10000; i++){
+			rand = new Random(System.currentTimeMillis());
+			TimeTable tb = new TimeTable();
+			LinkedList<Appt> list = createLinkedList();
+			int addToList = rand.nextInt(10);
+			Appt apptToFind = new Appt(10, 40, 26, 2, 2018, "find this", "find this");
+			if(addToList >= 4){
+				list.add(apptToFind);
+			}
+			LinkedList<Appt> result = tb.deleteAppt(list, apptToFind);
+		}
+	}
 
 }

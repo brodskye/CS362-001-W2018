@@ -2,7 +2,8 @@ package calendar;
 
 import java.util.Calendar;
 import java.util.Random;
-
+import java.util.LinkedList;
+import java.util.List;
 import org.junit.Test;
 
 
@@ -128,22 +129,25 @@ public class ApptRandomTest {
 		 String title = "test";
 		 String description = "test description";
 		 Random rand;
-		 for(int i = 0; i < NUM_TESTS; i++) {
+		 for(int i = 0; i < 100000; i++) {
 			rand = new Random(System.currentTimeMillis());
-			startHour = rand.nextInt(100) - rand.nextInt(100);
-			startMinute = rand.nextInt(100) - rand.nextInt(100);
-			startDay = rand.nextInt(100) - rand.nextInt(100);
-			startMonth = rand.nextInt(100) - rand.nextInt(100);
+			startHour = rand.nextInt(50) - rand.nextInt(50);
+			startMinute = rand.nextInt(80) - rand.nextInt(80);
+			startDay = rand.nextInt(50) - rand.nextInt(50);
+			startMonth = rand.nextInt(15) - rand.nextInt(15);
 			System.out.println("startHour:" + startHour);
 			System.out.println("startMinute:" + startMinute);
 			System.out.println("startDay:" + startDay);
 			System.out.println("startMonth:" + startMonth);
 			
+			int NumDaysInMonth;
 			if(startMonth > 12 || startMonth < 1)
-				break;	
+				startMonth = 1;
+
+			NumDaysInMonth = CalendarUtil.NumDaysInMonth(startYear,startMonth-1);
+
 			appt = createAppt(startHour, startMinute, startDay, startMonth, startYear, title, description);
 
-			int NumDaysInMonth= CalendarUtil.NumDaysInMonth(startYear,startMonth-1);
 
 			if(startHour<0 || startHour>23)
 	    		assertFalse(appt.getValid());
@@ -159,6 +163,9 @@ public class ApptRandomTest {
 	                	else
 	        	    		assertTrue(appt.getValid());
 		 }
+
+		 //LinkedList<Appt> appts = new LinkedList<Appt>();
+		 //appts.add(new Appt(startHour, startMinute, startDay, startMonth, startYear, title, description)))
 	 }
 	
 	@Test
