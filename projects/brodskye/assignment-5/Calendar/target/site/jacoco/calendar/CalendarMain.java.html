@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CalendarMain.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Calendar</a> &gt; <a href="index.source.html" class="el_package">calendar</a> &gt; <span class="el_source">CalendarMain.java</span></div><h1>CalendarMain.java</h1><pre class="source lang-java linenums">package calendar;
+/*
+ * CalendarMain.java
+ *  Adapted from  Paul Miles
+ */
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.GregorianCalendar;
+import java.util.LinkedList;
+
+
+
+
+<span class="nc" id="L14">public class CalendarMain {</span>
+	public static void main(String[] args) throws DateOutOfRangeException {
+        //Internal Diagnostic Messages turned on when true
+<span class="nc" id="L17">		 boolean diagnose = true;</span>
+
+		/** Collection of all of the appointments for the calendar day */		
+<span class="nc" id="L20">		LinkedList&lt;Appt&gt; listAppts = new LinkedList&lt;Appt&gt;();</span>
+<span class="nc" id="L21">		System.out.println(&quot;Calendar Main: \n&quot; );</span>
+		
+		
+     	/** the month the user is currently viewing **/
+     	int thisMonth;
+    	
+    	/** the year the user is currently viewing **/
+    	 int thisYear;
+    	
+    	/** todays date **/
+    	int thisDay;
+    	
+		//get todays date
+<span class="nc" id="L34">    	Calendar rightnow = Calendar.getInstance();</span>
+    	//current month/year/date is today
+<span class="nc" id="L36">    	thisMonth = rightnow.get(Calendar.MONTH)+1;</span>
+<span class="nc" id="L37">		thisYear = rightnow.get(Calendar.YEAR);</span>
+<span class="nc" id="L38">		thisDay = rightnow.get(Calendar.DAY_OF_MONTH);</span>
+		
+<span class="nc" id="L40">		 int startHour=15;</span>
+<span class="nc" id="L41">		 int startMinute=30;</span>
+<span class="nc" id="L42">		 int startDay=thisDay+1;  	</span>
+<span class="nc" id="L43">		 int startMonth=thisMonth; 	</span>
+<span class="nc" id="L44">		 int startYear=thisYear; 	</span>
+<span class="nc" id="L45">		 String title=&quot;Birthday Party&quot;;</span>
+<span class="nc" id="L46">		 String description=&quot;This is my birthday party.&quot;;</span>
+		 //Construct a new Appointment object with the initial data	 
+<span class="nc" id="L48">         Appt appt = new Appt(startHour,</span>
+                  startMinute ,
+                  startDay ,
+                  startMonth ,
+                  startYear ,
+                  title,
+                 description);
+<span class="nc bnc" id="L55" title="All 2 branches missed.">          if(diagnose){</span>
+<span class="nc" id="L56">          	System.out.println(appt.toString());</span>
+          } 
+         
+<span class="nc" id="L59">         listAppts.add(appt);</span>
+          
+      // create another appointment
+<span class="nc" id="L62">         startHour=14;</span>
+<span class="nc" id="L63">		 startMinute=30;</span>
+<span class="nc" id="L64">		 startDay=thisDay;  	</span>
+<span class="nc" id="L65">		 startMonth=thisMonth; 	</span>
+<span class="nc" id="L66">		 startYear=thisYear; 	</span>
+<span class="nc" id="L67">		 title=&quot;Class&quot;;</span>
+<span class="nc" id="L68">		 description=&quot;Rescheduled class.&quot;;</span>
+		 //Construct a new Appointment object with the initial data	 
+<span class="nc" id="L70">         appt = new Appt(startHour,</span>
+                  startMinute ,
+                  startDay ,
+                  startMonth ,
+                  startYear ,
+                  title,
+                 description);
+        
+<span class="nc bnc" id="L78" title="All 2 branches missed.">         if(diagnose){</span>
+<span class="nc" id="L79">         	System.out.println(appt.toString());</span>
+         }
+<span class="nc" id="L81">         listAppts.add(appt);</span>
+         // create another appointment
+<span class="nc" id="L83">         startHour=13;</span>
+<span class="nc" id="L84">		 startMinute=30;</span>
+<span class="nc" id="L85">		 startDay=thisDay;		</span>
+<span class="nc" id="L86">		 startMonth=thisMonth;	</span>
+<span class="nc" id="L87">		 startYear=thisYear;	</span>
+<span class="nc" id="L88">		 title=&quot;Meeting Today&quot;;</span>
+<span class="nc" id="L89">		 description=&quot;Meeting with the students.&quot;;</span>
+		 //Construct a new Appointment object with the initial data	 
+<span class="nc" id="L91">         appt = new Appt(startHour,</span>
+                  startMinute ,
+                  startDay ,
+                  startMonth ,
+                  startYear ,
+                  title,
+                 description);
+         
+<span class="nc bnc" id="L99" title="All 2 branches missed.">         if(diagnose){</span>
+<span class="nc" id="L100">         	System.out.println(appt.toString());</span>
+         }
+<span class="nc" id="L102">         listAppts.add(appt);</span>
+         // create another appointment
+<span class="nc" id="L104">         startHour=16;</span>
+<span class="nc" id="L105">		 startMinute=30;</span>
+<span class="nc" id="L106">		 startDay=thisDay+1;		</span>
+<span class="nc" id="L107">		 startMonth=thisMonth+1;	</span>
+<span class="nc" id="L108">		 startYear=thisYear;	</span>
+<span class="nc" id="L109">		 title=&quot;Visit&quot;;</span>
+<span class="nc" id="L110">		 description=&quot;Visiting my parents!&quot;;</span>
+		 //Construct a new Appointment object with the initial data	 
+<span class="nc" id="L112">         appt = new Appt(startHour,</span>
+                  startMinute ,
+                  startDay ,
+                  startMonth ,
+                  startYear ,
+                  title,
+                 description);
+<span class="nc" id="L119">         int[] recurDaysArr={2,3,4};</span>
+<span class="nc" id="L120">         appt.setRecurrence( recurDaysArr, Appt.RECUR_BY_WEEKLY, 2, Appt.RECUR_NUMBER_FOREVER);</span>
+        
+<span class="nc bnc" id="L122" title="All 2 branches missed.">         if(diagnose){</span>
+<span class="nc" id="L123">         	System.out.println(appt.toString());</span>
+         }
+<span class="nc" id="L125">         listAppts.add(appt);</span>
+<span class="nc bnc" id="L126" title="All 2 branches missed."> 		if(diagnose){</span>
+<span class="nc" id="L127">			System.out.println(&quot;The Appointments are not sorted!&quot;);</span>
+<span class="nc" id="L128">         	System.out.println(listAppts.toString());</span>
+	
+<span class="nc" id="L130">            Collections.sort(listAppts);</span>
+<span class="nc" id="L131">			System.out.println(&quot;The Appointments are sorted!&quot;);</span>
+<span class="nc" id="L132">         	System.out.println(listAppts.toString());</span>
+            
+ 		
+ 		}
+
+
+
+         
+		//get a list of appointments for one day, which is today
+<span class="nc" id="L141">		GregorianCalendar today = new GregorianCalendar(thisYear,thisMonth,thisDay);</span>
+<span class="nc" id="L142">		GregorianCalendar tomorrow = (GregorianCalendar)today.clone();</span>
+<span class="nc" id="L143">		tomorrow.add(Calendar.DAY_OF_MONTH,1);</span>
+<span class="nc" id="L144">		String todatDate=today.get(Calendar.MONTH)+ &quot;/&quot;+ today.get(Calendar.DAY_OF_MONTH)+&quot;/&quot;+today.get(Calendar.YEAR);</span>
+<span class="nc" id="L145">		String tomorrowDate=tomorrow.get(Calendar.MONTH)+ &quot;/&quot;+ tomorrow.get(Calendar.DAY_OF_MONTH)+&quot;/&quot;+tomorrow.get(Calendar.YEAR);</span>
+
+<span class="nc bnc" id="L147" title="All 2 branches missed.">		if(diagnose){</span>
+<span class="nc" id="L148">			System.out.println(&quot;today is:&quot; + todatDate);</span>
+<span class="nc" id="L149">			System.out.println(&quot;tomorrow is:&quot; + tomorrowDate);</span>
+		}
+		
+<span class="nc" id="L152">		TimeTable timeTable=new TimeTable();</span>
+        //Create a linked list of calendar days to return
+<span class="nc" id="L154">        LinkedList&lt;CalDay&gt; calDays = new LinkedList&lt;CalDay&gt;();</span>
+
+		
+ 		
+<span class="nc bnc" id="L158" title="All 2 branches missed.">		if (diagnose) {</span>
+	
+
+<span class="nc" id="L161">			System.out.println(&quot;The number of appointments between &quot;+ todatDate +&quot; and &quot; + tomorrowDate);</span>
+<span class="nc" id="L162">			calDays = new LinkedList&lt;CalDay&gt;();</span>
+<span class="nc" id="L163">			calDays = timeTable.getApptRange(listAppts, today, tomorrow);</span>
+<span class="nc bnc" id="L164" title="All 2 branches missed.">			for (int i = 0; i &lt; calDays.size(); i++)</span>
+<span class="nc" id="L165">				System.out.println(calDays.get(i).toString());</span>
+		}
+		//delete a particular appointment from the list
+<span class="nc bnc" id="L168" title="All 2 branches missed.">		if(diagnose){</span>
+<span class="nc" id="L169">			System.out.println(&quot;Delete  &quot;+ listAppts.get(2) );</span>
+		}
+<span class="nc" id="L171">		LinkedList&lt;Appt&gt; listDeletedAppts=timeTable.deleteAppt(listAppts, listAppts.get(2));</span>
+<span class="nc bnc" id="L172" title="All 2 branches missed.">		if(diagnose){</span>
+<span class="nc" id="L173">			System.out.println(&quot;The number of appointments:  &quot;+ listDeletedAppts.size() );</span>
+
+		}
+<span class="nc bnc" id="L176" title="All 2 branches missed.">		if (diagnose) {</span>
+<span class="nc" id="L177">			System.out.println(&quot;The number of appointments between &quot;+ todatDate +&quot; and &quot; + tomorrowDate);</span>
+
+<span class="nc" id="L179">			calDays = new LinkedList&lt;CalDay&gt;();</span>
+<span class="nc" id="L180">			calDays = timeTable.getApptRange(listAppts, today, tomorrow);</span>
+<span class="nc bnc" id="L181" title="All 2 branches missed.">			for (int i = 0; i &lt; calDays.size(); i++)</span>
+<span class="nc" id="L182">				System.out.println(calDays.get(i).toString());</span>
+		}
+<span class="nc" id="L184">        System.exit(0);</span>
+		
+<span class="nc" id="L186">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>

@@ -1,0 +1,31 @@
+Bug Report for Teammate's Code
+
+Bug #1: Appt.java, isValid()
+replaced the '||' in "if(startMinute<0 || startMinute>59)" with an &&.
+
+This causes a chain reaction in the application and causes many of the other test methods and normal
+functions to crash. 
+
+The reason is because by replacing the || with an &&, no matter what value the user enters for startMinute,
+it's never going to be invalid, because it's impossible for a number to be both less than 0 and greater
+than 59.
+
+Bug #2: TimeTable.java, getApptOccurences()
+in the line "for(int i = 0; i < appt.getRecurNumber()+1; i++)", removed the +1.
+
+This causes the getApptoccurences method to always miss the last occurence for any appointment.
+
+The reason is because of how recurrence for an appointment is defined in the Appt class, requiring this
+method to increment the recur number by one to get all of the possible recurrences for an appointment.
+
+Bug #3: Appt.java, compareTo()
+In the line "return startMinute+startHour+day+month+year", replaced the + between startMinute and
+startHour with a -.
+
+This causes a faulty compareTo value when comparing two different appointments in Calday or in TimeTable,
+which also leads to a sort of chain reaction where other parts of the code fail because they rely heavily
+on this method working properly.
+
+The reason is becasue this can give faulty values about if an appointment is before or after another appointment.
+Combined with the failure of the isValid() method to properly detect value startMinutes, the effects are 
+in a way amplified.
